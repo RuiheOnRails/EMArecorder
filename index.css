@@ -1,0 +1,21 @@
+.custBtn {
+    margin: 0.5rem;
+    min-width: 15rem;
+    min-height: 13rem;
+}
+
+@media(max-width: 780px){
+    .custBtn {
+        margin: 0.25rem;
+        min-width: 12rem;
+        min-height: 9rem;
+    }
+}
+
+@media(max-width: 375px){
+    .custBtn {
+        margin: 0.25rem;
+        min-width: 10rem;
+        min-height: 8rem;
+    }
+}
