@@ -12,10 +12,18 @@
     }
 }
 
-@media(max-width: 375px){
+@media(max-width: 450px){
     .custBtn {
         margin: 0.25rem;
         min-width: 10rem;
-        min-height: 8rem;
+        min-height: 7rem;
+    }
+}
+
+@media(max-width: 360px){
+    .custBtn {
+        margin: 0.20rem;
+        min-width: 9.5rem;
+        min-height: 6rem;
     }
 }
