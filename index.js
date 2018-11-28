@@ -45,7 +45,7 @@ function addEventListenerToBtns(){
     document.getElementById("btnDownload").addEventListener("click", (e) =>{
         e.preventDefault();
         convertArrayOfObjectsToCSV(trackingData);
-        downloadCSV({});
+        downloadCSV({"filename": partID});
         document.getElementById("btnReset").click();
     });
 }
