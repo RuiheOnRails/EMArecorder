@@ -1,4 +1,83 @@
 var trackingData = [];
+var partID = "";
+var courseID = "";
+var btnIdToNameMap = new Map();
+btnIdToNameMap.set("btnBore", "Bored");
+btnIdToNameMap.set("btnEnCo", "Engaged and Concentrated");
+btnIdToNameMap.set("btnFrus", "Frustrated");
+btnIdToNameMap.set("btnDeli", "Delight");
+btnIdToNameMap.set("btnConf", "Confused");
+btnIdToNameMap.set("btnSupr", "Surprised");
+btnIdToNameMap.set("btnNeut", "Neutral");
+btnIdToNameMap.set("btnStop", "Stop");
+
+function addEventListenerToBtns(){
+    btnIdToNameMap.forEach((v, k) => {
+        document.getElementById(k).addEventListener("click", e => {
+            e.preventDefault();
+            addToTrackingData(v,getCurrentTimeInString());
+        });
+    });
+
+    document.getElementById("btnStart").addEventListener("click", (e) =>{
+        e.preventDefault();
+        partID = document.getElementById("partID").value;
+        courseID = document.getElementById("courseID").value;
+
+        if(partID === "" || courseID === ""){
+            showModal();
+        }else{
+            addToTrackingData("Start",getCurrentTimeInString());
+            enableBtns();
+            lockRequiredForm();
+            document.getElementById("btnStart").setAttribute("disabled", true);
+        }
+    });
+
+    document.getElementById("btnReset").addEventListener("click", (e) =>{
+        e.preventDefault();
+        document.getElementById("btnStart").removeAttribute("disabled");
+        disableBtns();
+        enableRequiredForm();
+        trackingData = [];
+    });
+    
+    document.getElementById("btnDownload").addEventListener("click", (e) =>{
+        e.preventDefault();
+        convertArrayOfObjectsToCSV(trackingData);
+        downloadCSV({});
+        document.getElementById("btnReset").click();
+    });
+}
+
+//true or false does not matter in this function, to re-enable button, attribute disabled must be removed
+function disableBtns() {
+    btnIdToNameMap.forEach((v, k) => {
+        document.getElementById(k).setAttribute("disabled", true);
+    });
+
+    document.getElementById("btnReset").setAttribute("disabled", true);
+    document.getElementById("btnDownload").setAttribute("disabled", true);
+}
+
+function enableBtns() {
+    btnIdToNameMap.forEach((v, k) => {
+        document.getElementById(k).removeAttribute("disabled");
+    })
+
+    document.getElementById("btnReset").removeAttribute("disabled");
+    document.getElementById("btnDownload").removeAttribute("disabled");
+}
+
+function lockRequiredForm(){
+    document.getElementById("partID").setAttribute("readonly", true);
+    document.getElementById("courseID").setAttribute("readonly", true);
+}
+
+function enableRequiredForm(){
+    document.getElementById("partID").removeAttribute("readonly");
+    document.getElementById("courseID").removeAttribute("readonly");
+}
 
 function convertArrayOfObjectsToCSV(args) {  
     var result, ctr, keys, columnDelimiter, lineDelimiter, data;
@@ -57,67 +136,30 @@ function getCurrentTimeInString(){
 
 function addToTrackingData(emotion, time){
     var obj = {
+        PartID: "",
+        CourseID: "",
         Emotion: "",
         Date: "",
         TimeStamp: ""
     };
+    obj.PartID = partID;
+    obj.CourseID = courseID;
     obj.Emotion = emotion;
     obj.Date = time;
     trackingData.push(obj);
 }
 
-document.querySelector("#btnStart").addEventListener("click", (e) =>{
-    e.preventDefault()
-    addToTrackingData("Start",getCurrentTimeInString());
-})
+function showModal(){
+    $("#requiredModal").modal('show');
 
-document.querySelector("#btnBore").addEventListener("click", (e) =>{
-    e.preventDefault()
-    addToTrackingData("Bored",getCurrentTimeInString());
-})
+    $("#requiredModal").on('hidden.bs.modal', function () {
+        if(partID === ""){
+            document.getElementById("partID").focus();
+        }else{
+            document.getElementById("courseID").focus();
+        }
+    });
+}
 
-document.querySelector("#btnEnCo").addEventListener("click", (e) =>{
-    e.preventDefault()
-    addToTrackingData("Engaged and Concentrated",getCurrentTimeInString());
-})
-
-document.querySelector("#btnFrus").addEventListener("click", (e) =>{
-    e.preventDefault()
-    addToTrackingData("Frustrated",getCurrentTimeInString());
-})
-
-document.querySelector("#btnDeli").addEventListener("click", (e) =>{
-    e.preventDefault()
-    addToTrackingData("Delight",getCurrentTimeInString());
-})
-
-document.querySelector("#btnConf").addEventListener("click", (e) =>{
-    e.preventDefault()
-    addToTrackingData("Confused",getCurrentTimeInString());
-})
-
-document.querySelector("#btnSupr").addEventListener("click", (e) =>{
-    e.preventDefault()
-    addToTrackingData("Surprised",getCurrentTimeInString());
-})
-
-document.querySelector("#btnNeut").addEventListener("click", (e) =>{
-    e.preventDefault()
-    addToTrackingData("Neutral",getCurrentTimeInString());
-})
-
-document.querySelector("#btnStop").addEventListener("click", (e) =>{
-    e.preventDefault()
-    addToTrackingData("Stop",getCurrentTimeInString());
-})
-
-document.querySelector("#btnReset").addEventListener("click", (e) =>{
-    e.preventDefault()
-    trackingData = [];
-})
-
-document.querySelector("#btnDownload").addEventListener("click", (e) =>{
-    e.preventDefault()
-    convertArrayOfObjectsToCSV(trackingData);
-    downloadCSV({});
-})
+addEventListenerToBtns();
+disableBtns();
