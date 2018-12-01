@@ -13,11 +13,11 @@
 <body>
     <div class="toptext jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-5">EMA</h1>
-                <p class="lead">Ecological Momentary Assessment. <br> 
-                enter required IDs, press start, then record reactions by clicking corresponding buttons.
+                <h1 class="display-5">Emotion Self-Report</h1>
+                <p class="lead">Thank you for participating in our study! <br> 
+                Please enter your course number and the participant ID assigned to you before you begin. 
                 <br>
-                when finished, press stop, then press download to export recorded data in csv
+                Please press start when the class started. You can click on the button that best represent the emotions you are feeling at the time. Please press stop when the class ended. Then press download to export recorded data in csv.
                 </p>
             </div>
     </div>
@@ -28,17 +28,17 @@
         <form class="justify-content-center">
             <div class="form-group">
                 <label for="partID">Participant ID</label>
-                <input type="text" class="form-control" id="partID" placeholder="participant id here">
+                <input type="text" class="form-control" id="partID" placeholder="enter your participant id here">
             </div>
             <div class="form-group">
-                <label for="courseID">Course ID</label>
-                <input type="text" class="form-control" id="courseID" placeholder="course id here">
+                <label for="courseID">Course Number</label>
+                <input type="text" class="form-control" id="courseID" placeholder="enter course number here">
             </div>
         </form>
         <div id="controlButtons"class="d-flex justify-content-center flex-wrap">
             <button id="btnStart" name="Start" type="button" class="btn btn-outline-success m-1">Start</button>
             <button id="btnStop" name="Stop" type="button" class="btn btn-outline-danger m-1">Stop</button>
-            <button id="btnReset" type="button" class="btn btn-outline-warning m-1">Reset</button>
+            <!-- <button id="btnReset" type="button" class="btn btn-outline-warning m-1">Reset</button> -->
             <button id="btnDownload" type="button" class="btn btn-outline-info m-1">Download</button>
         </div>
 
