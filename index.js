@@ -34,19 +34,19 @@ function addEventListenerToBtns(){
         }
     });
 
-    document.getElementById("btnReset").addEventListener("click", (e) =>{
-        e.preventDefault();
-        document.getElementById("btnStart").removeAttribute("disabled");
-        disableBtns();
-        enableRequiredForm();
-        trackingData = [];
-    });
+    // document.getElementById("btnReset").addEventListener("click", (e) =>{
+    //     e.preventDefault();
+    //     document.getElementById("btnStart").removeAttribute("disabled");
+    //     disableBtns();
+    //     enableRequiredForm();
+    //     trackingData = [];
+    // });
     
     document.getElementById("btnDownload").addEventListener("click", (e) =>{
         e.preventDefault();
         convertArrayOfObjectsToCSV(trackingData);
         downloadCSV({"filename": partID});
-        document.getElementById("btnReset").click();
+        // document.getElementById("btnReset").click();
     });
 }
 
@@ -56,7 +56,7 @@ function disableBtns() {
         document.getElementById(k).setAttribute("disabled", true);
     });
 
-    document.getElementById("btnReset").setAttribute("disabled", true);
+    // document.getElementById("btnReset").setAttribute("disabled", true);
     document.getElementById("btnDownload").setAttribute("disabled", true);
 }
 
@@ -65,7 +65,7 @@ function enableBtns() {
         document.getElementById(k).removeAttribute("disabled");
     })
 
-    document.getElementById("btnReset").removeAttribute("disabled");
+    // document.getElementById("btnReset").removeAttribute("disabled");
     document.getElementById("btnDownload").removeAttribute("disabled");
 }
 
