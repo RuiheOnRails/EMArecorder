@@ -10,6 +10,7 @@ btnIdToNameMap.set("btnConf", "Confused");
 btnIdToNameMap.set("btnSupr", "Surprised");
 btnIdToNameMap.set("btnNeut", "Neutral");
 btnIdToNameMap.set("btnStop", "Stop");
+btnIdToNameMap.set("btnDist", "Distracted")
 
 function addEventListenerToBtns(){
     btnIdToNameMap.forEach((v, k) => {
